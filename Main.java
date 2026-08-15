@@ -1,40 +1,35 @@
 public class Main {
     public static void main(String[] args) {
-        // Create initial vertices
-        Point v1 = new Point(1, 1);
-        Point v2 = new Point(5, 1);
-        Point v3 = new Point(3, 4);
+        // 1. Create Points
+        Point p1 = new Point(0, 0);
+        Point p2 = new Point(0, 4);
+        Point p3 = new Point(3, 0);
 
-        // Null/Default constructor
-        Triangle t1 = new Triangle();
-        System.out.println("Null const:");
-        t1.show();
+        // 2. Subtract points to make a Vector
+        Vector v1 = p1.vectorTo(p2);
+        System.out.println("Vector P1 -> P2: " + v1);
+        System.out.println("Vector Magnitude: " + v1.getMagnitude());
 
-        // Parameterized constructor
-        Triangle t2 = new Triangle(v1, v2, v3);
-        System.out.println("Para const:");
-        t2.show();
+        // 3. Construct Lines from Points
+        Line l1 = new Line(p1, p2);
+        Line l2 = new Line(p2, p3);
+        Line l3 = new Line(p3, p1);
 
-        // Copy constructor
-        Triangle t3 = new Triangle(t2);
-        System.out.println("Copy const:");
-        t3.show();
+        // 4. Calculate Line Intersection
+        Line lineA = new Line(0, 0, 4, 4);
+        Line lineB = new Line(0, 4, 4, 0);
+        Point intersect = lineA.intersection(lineB);
+        System.out.println("Line Intersection Point: " + intersect);
 
-        // Setter
-        Point v4 = new Point(2, 2);
-        Point v5 = new Point(6, 2);
-        Point v6 = new Point(4, 5);
-        t1.set(v4, v5, v6);
-        System.out.println("After setter:");
-        t1.show();
+        // 5. Construct Triangle using Lines (composed of Points)
+        Triangle triangleFromLines = new Triangle(l1, l2, l3);
+        System.out.println("\n--- Triangle from Lines ---");
+        System.out.println(triangleFromLines);
+        System.out.println("Perimeter: " + triangleFromLines.getPerimeter());
 
-        // Getters
-        System.out.println("Getter v1: " + t2.getV1());
-        System.out.println("Getter v2: " + t2.getV2());
-        System.out.println("Getter v3: " + t2.getV3());
-
-        // toString
-        System.out.println("To string:");
-        System.out.println(t2.toString());
+        // 6. Construct Triangle directly from Points
+        Triangle triangleFromPoints = new Triangle(p1, p2, p3);
+        System.out.println("\n--- Triangle from Points ---");
+        System.out.println(triangleFromPoints);
     }
 }

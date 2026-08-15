@@ -1,48 +1,40 @@
 public class Triangle {
-    private Point v1;
-    private Point v2;
-    private Point v3;
+    private Line line1;
+    private Line line2;
+    private Line line3;
 
-    // Default / Null Constructor
+    // Default Constructor
     public Triangle() {
-        this.v1 = new Point();
-        this.v2 = new Point();
-        this.v3 = new Point();
+        this.line1 = new Line(0, 0, 0, 1);
+        this.line2 = new Line(0, 1, 1, 0);
+        this.line3 = new Line(1, 0, 0, 0);
     }
 
-    // Parameterized Constructor
-    public Triangle(Point v1, Point v2, Point v3) {
-        this.v1 = v1;
-        this.v2 = v2;
-        this.v3 = v3;
+    // Constructed from 3 Point objects (creates Line objects internally)
+    public Triangle(Point p1, Point p2, Point p3) {
+        this.line1 = new Line(p1, p2);
+        this.line2 = new Line(p2, p3);
+        this.line3 = new Line(p3, p1);
     }
 
-    // Copy Constructor (Deep Copy)
-    public Triangle(Triangle obj) {
-        this.v1 = new Point(obj.v1);
-        this.v2 = new Point(obj.v2);
-        this.v3 = new Point(obj.v3);
+    // Constructed from 3 Line objects
+    public Triangle(Line l1, Line l2, Line l3) {
+        this.line1 = new Line(l1);
+        this.line2 = new Line(l2);
+        this.line3 = new Line(l3);
     }
 
-    // Setters & Getters
-    public void set(Point v1, Point v2, Point v3) {
-        this.v1 = v1;
-        this.v2 = v2;
-        this.v3 = v3;
-    }
+    // Getters
+    public Line getLine1() { return new Line(line1); }
+    public Line getLine2() { return new Line(line2); }
+    public Line getLine3() { return new Line(line3); }
 
-    public Point getV1() { return this.v1; }
-    public Point getV2() { return this.v2; }
-    public Point getV3() { return this.v3; }
-
-    public void show() {
-        System.out.println("V1: " + this.v1);
-        System.out.println("V2: " + this.v2);
-        System.out.println("V3: " + this.v3);
+    public double getPerimeter() {
+        return line1.getLength() + line2.getLength() + line3.getLength();
     }
 
     @Override
     public String toString() {
-        return "Triangle [V1=" + v1 + ", V2=" + v2 + ", V3=" + v3 + "]";
+        return "Triangle[\n  " + line1 + ",\n  " + line2 + ",\n  " + line3 + "\n]";
     }
 }
